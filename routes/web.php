@@ -7,6 +7,7 @@ use App\Http\Controllers\User\Link\LinkController;
 use App\Http\Controllers\User\Link\RegenerateLinkController;
 use App\Http\Controllers\User\Lottery\LotteryController;
 use App\Http\Controllers\User\Lottery\PlayLotteryGameController;
+use App\Http\Controllers\User\Lottery\LotteryResultsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [RegisteredUserController::class, 'create']);
@@ -27,4 +28,5 @@ Route::middleware('auth')->group(function () {
     // Lotteries
     Route::get('/user/lottery/{token}', [LotteryController::class, 'show'])->name('user.lottery.show');
     Route::post('/user/lottery/{token}/play', PlayLotteryGameController::class)->name('user.lottery.play');
+    Route::get('/user/lottery/{token}/results', LotteryResultsController::class)->name('user.lottery.results');
 });

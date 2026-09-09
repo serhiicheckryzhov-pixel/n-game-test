@@ -8,7 +8,7 @@
             </form>
             @endif
 
-            <form method="POST" action="{{route('user.lottery.play', ['token' => $token])}}">
+            <form method="GET" action="{{route('user.lottery.results', ['token' => $token])}}">
                 <button type="submit" class="btn btn-primary">History</button>
             </form>
 

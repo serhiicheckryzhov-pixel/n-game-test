@@ -36,7 +36,7 @@
 
             @endif
 
-            @if (request()->routeIs('user.lottery.show'))
+            @if (request()->routeIs('user.lottery.show') || request()->routeIs('user.lottery.results'))
                     <a href="{{route('user.links')}}" class="btn">Back to Link</a>
             @endif
             <a href="/logout" class="btn">Logout</a>

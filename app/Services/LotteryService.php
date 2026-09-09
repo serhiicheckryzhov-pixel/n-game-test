@@ -37,6 +37,17 @@ class LotteryService
     }
 
     /**
+     * Get the last lottery result for the given user link.
+     *
+     * @param UserLink $userLink
+     * @return \Illuminate\Database\Eloquent\Collection<int, LotteryResult>
+     */
+    public function getLastLotteryResults(UserLink $userLink)
+    {
+        return LotteryResult::where('user_link_id', $userLink->id)->latest()->limit(3)->get();
+    }
+
+    /**
      * Saves the lottery result for the given user link and income.
      *
      * @param UserLink $userLink
