@@ -3,14 +3,35 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
-
-    public function store()
+    public function create()
     {
+        return view('auth.login');
+    }
 
+    public function store(LoginRequest $request)
+    {
+        $user = User::where('name', $request->validated('name'))
+            ->where('phone', $request->validated('phone'))
+            ->first();
+
+        if (! $user) {
+            return back()->withErrors([
+                'name' => __('auth.failed'),
+            ])->withInput();
+        }
+
+        Auth::login($user);
+
+        $request->session()->regenerate();
+
+        return redirect()->route('user.links');
     }
 
     public function destroy(Request $request)

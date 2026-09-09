@@ -1,19 +1,22 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\SessionsController;
+use App\Http\Controllers\User\Link\DeactivateLinkController;
+use App\Http\Controllers\User\Link\LinkController;
+use App\Http\Controllers\User\Link\RegenerateLinkController;
 use App\Http\Controllers\User\Lottery\LotteryController;
 use App\Http\Controllers\User\Lottery\PlayLotteryGameController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\User\Link\LinkController;
-
-use App\Http\Controllers\User\Link\RegenerateLinkController;
-use App\Http\Controllers\User\Link\DeactivateLinkController;
 
 Route::get('/', [RegisteredUserController::class, 'create']);
 
-Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
-Route::get('/logout', [RegisteredUserController::class, 'logout']);
+Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');
+
+Route::get('/login', [SessionsController::class, 'create'])->name('login');
+Route::post('/login', [SessionsController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
     // Links

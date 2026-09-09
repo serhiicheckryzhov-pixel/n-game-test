@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\DB;
 class RegistrationService
 {
 
-    public function __construct(UserLinkService $userLinkService)
+    public function __construct(protected UserLinkService $userLinkService)
     {
-        $this->userLinkService = $userLinkService;
     }
 
     /**
