@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_links', function (Blueprint $table) {
+        Schema::create('lottery_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('token')->index();
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->dateTime('expires_at');
+            $table->foreignId('user_link_id')->constrained('user_links')->cascadeOnDelete();
+            $table->decimal('income', 10, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_links');
+        Schema::dropIfExists('lottery_results_history');
     }
 };

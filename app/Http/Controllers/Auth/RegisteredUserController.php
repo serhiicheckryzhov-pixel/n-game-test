@@ -27,7 +27,7 @@ class RegisteredUserController extends Controller
             // Auth new registered user
              Auth::login($user);
 
-             return redirect()->route('user.link');
+             return redirect()->route('user.links');
 
         } catch (\Exception $e) {
 

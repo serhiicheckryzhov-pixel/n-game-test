@@ -6,6 +6,7 @@ use App\Enums\LinkStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['user_id', 'token', 'status', 'expires_at'])]
 class UserLink extends Model
@@ -19,6 +20,11 @@ class UserLink extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function lotteryResults(): HasMany
+    {
+        return $this->hasMany(LotteryResult::class, 'user_link_id');
     }
 
     public function scopeForUser($query, int $userId)

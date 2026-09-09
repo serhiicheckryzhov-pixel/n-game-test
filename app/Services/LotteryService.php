@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\LotteryResult;
 use App\Models\UserLink;
 
 class LotteryService
@@ -13,16 +14,42 @@ class LotteryService
         ['max' => 1000, 'multiplier' => 0.7],
     ];
 
+    /**
+     * Calculates the income based on the generated score and predefined tiers.
+     *
+     * @param UserLink $userLink The user link object.
+     * @return float The calculated income, rounded to two decimal places.
+     */
     public function playLotteryGame(UserLink $userLink) : float
     {
         $score  = rand(0, 1000);
         $win    = $score % 2 === 0;
 
+        $income = 0.00;
+
         if ($win) {
-            return $this->calculateIncome($score);
+            $income = $this->calculateIncome($score);
         }
 
-        return 0.00;
+        $this->saveLotteryResult($userLink, $income);
+
+        return $income;
+    }
+
+    /**
+     * Saves the lottery result for the given user link and income.
+     *
+     * @param UserLink $userLink
+     * @param float $income
+     * @return void
+     */
+    private function saveLotteryResult(UserLink $userLink, float $income) : void
+    {
+        LotteryResult::create([
+            'user_id' => $userLink->user_id,
+            'user_link_id' => $userLink->id,
+            'income' => $income,
+        ]);
     }
 
     /**
