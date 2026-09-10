@@ -1,13 +1,15 @@
 
 ### Clone the repository
 
-`git clone https://github.com/serhiicheckryzhov-pixel/n-game-test
-cd <project-directory>`
+`git clone https://github.com/serhiicheckryzhov-pixel/n-game-test`
+
+`cd <project-directory>`
 
 ### Configure environment variables
 
-`cp .env.example .env
-php artisan key:generate`
+`cp .env.example .env`
+
+`php artisan key:generate`
 
 ### Install dependencies
 
