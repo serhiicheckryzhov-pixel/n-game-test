@@ -11,7 +11,12 @@ class LinkController extends Controller
     public function index()
     {
         $link = UserLink::where('user_id', Auth::id())->first();
-        return view('user.link.index', ['link' => $link]);
+        $isExpired = $link ? $link->isExpired() : false;
+
+        return view('user.link.index', [
+            'link' => $link,
+            'isExpired' => $isExpired,
+        ]);
     }
 
 }

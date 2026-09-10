@@ -3,13 +3,15 @@
         <p class="m-5">
 
             Link is:&nbsp;
-            @if($link->status === \App\Enums\LinkStatus::Active)
+            @if($link->status === \App\Enums\LinkStatus::Active && !($isExpired ?? $link->isExpired()))
                 <a href="/user/lottery/{{$link->token}}" class="link link-info">{{$link->token}}</a>
             @else
                 <b>{{$link->token}}</b>
             @endif
         </p>
-        @if($link->status === \App\Enums\LinkStatus::Active)
+        @if($isExpired ?? $link->isExpired())
+            <div class="badge badge-error m-5">Link is Expired</div>
+        @elseif($link->status === \App\Enums\LinkStatus::Active)
             <div class="badge badge-primary m-5">Expires at: {{$link->expires_at}}</div>
         @else
             <div class="badge badge-error m-5">Link is Inactive</div>

@@ -27,6 +27,11 @@ class UserLink extends Model
         return $this->hasMany(LotteryResult::class, 'user_link_id');
     }
 
+    public function isExpired(): bool
+    {
+        return $this->expires_at ? $this->expires_at->isPast() : false;
+    }
+
     public function scopeForUser($query, int $userId)
     {
         return $query->where('user_id', $userId)->latest();
