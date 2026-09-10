@@ -14,6 +14,7 @@
                 @error('phone')<p>{{ $message }}</p>@enderror
 
                 <button class="btn btn-neutral mt-4">Register</button>
+                <a href="{{route('login')}}" class="btn btn-primary mt-4">Log In</a>
             </fieldset>
         </div>
     </form>

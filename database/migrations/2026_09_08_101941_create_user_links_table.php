@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_links', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('token')->index();
+            $table->string('token')->index()->unique();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->dateTime('expires_at');
             $table->timestamps();

@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class UserLinkService
 {
     /**
-     * Creates a temporary link for the given user with an expiration date.
+     * Creates a lottery link for the given user with an expiration date.
      *
      * @param User $user The user for whom the temporary link is being generated.
      * @return UserLink Returns the generated temporary link instance associated with the user.
@@ -27,7 +27,7 @@ class UserLinkService
     }
 
     /**
-     * Regenerates the temporary link for the authenticated user.
+     * Regenerates the lottery link for the authenticated user.
      *
      * @return void
      */
@@ -46,6 +46,11 @@ class UserLinkService
         return null;
     }
 
+    /**
+     * Deactivates the lottery link for the authenticated user.
+     *
+     * @return void
+     */
     public function deactivateUserLink() : ?UserLink
     {
         $userLink = UserLink::forUser(Auth::id())->first();
