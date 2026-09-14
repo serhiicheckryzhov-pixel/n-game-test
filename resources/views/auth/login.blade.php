@@ -6,11 +6,11 @@
                 <legend class="fieldset-legend">Login</legend>
 
                 <label class="label">Username</label>
-                <input type="text" name="name" class="input" :value="old('name')" placeholder="Username" />
+                <input type="text" name="name" class="input" value="{{ old('name') }}" placeholder="Username" />
                 @error('name')<p>{{ $message }}</p>@enderror
 
                 <label class="label">Phonenumber</label>
-                <input type="text" name="phone" class="input" :value="old('phone')" placeholder="Phone" />
+                <input type="text" name="phone" class="input" value="{{ old('phone') }}" placeholder="Phone" />
                 @error('phone')<p>{{ $message }}</p>@enderror
 
                 <button class="btn btn-neutral mt-4">Login</button>
